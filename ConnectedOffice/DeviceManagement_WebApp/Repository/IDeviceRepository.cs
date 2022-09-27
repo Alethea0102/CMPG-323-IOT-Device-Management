@@ -1,7 +1,10 @@
 ﻿using DeviceManagement_WebApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DeviceManagement_WebApp.Repository
 {

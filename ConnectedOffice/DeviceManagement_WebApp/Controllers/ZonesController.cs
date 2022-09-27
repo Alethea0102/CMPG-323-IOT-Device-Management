@@ -35,8 +35,6 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            //var zone = await _context.Zone
-             //   .FirstOrDefaultAsync(m => m.ZoneId == id);
             var zone = _ZoneRepository.GetById(id);
             if (zone == null)
             {
@@ -61,10 +59,6 @@ namespace DeviceManagement_WebApp.Controllers
         {
             var zonev = _ZoneRepository.newGuid(zone);
             _ZoneRepository.Add(zonev);
-            //zone.ZoneId = Guid.NewGuid();
-            //_context.Add(zone);
-            //await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
         }
 
@@ -99,9 +93,7 @@ namespace DeviceManagement_WebApp.Controllers
 
             try
             {
-                //_context.Update(zone);
                 _ZoneRepository.Update(zone);
-                //await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -126,8 +118,6 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            // var zone = await _context.Zone
-            //    .FirstOrDefaultAsync(m => m.ZoneId == id);
             var zone = _ZoneRepository.GetById(id);
             if (zone == null)
             {
@@ -142,9 +132,6 @@ namespace DeviceManagement_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            //var zone = await _context.Zone.FindAsync(id);
-            //_context.Zone.Remove(zone);
-            //await _context.SaveChangesAsync();
             var zone = _ZoneRepository.GetById(id);
             _ZoneRepository.Remove(zone);
 

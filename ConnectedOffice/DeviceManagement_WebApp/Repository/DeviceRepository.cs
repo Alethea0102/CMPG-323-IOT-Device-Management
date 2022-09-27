@@ -1,10 +1,13 @@
 ﻿using DeviceManagement_WebApp.Data;
 using DeviceManagement_WebApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DeviceManagement_WebApp.Repository
 {
@@ -26,8 +29,9 @@ namespace DeviceManagement_WebApp.Repository
 
         public IIncludableQueryable<Device, Zone> DevicesPerZone()
         {
-            var connectedOffice = _context.Device.Include(d => d.Category).Include(d => d.Zone);
-            return connectedOffice;
+            var connectedOfficeContext = _context.Device.Include(d => d.Category).Include(d => d.Zone);
+
+            return connectedOfficeContext;
         }
 
         public Guid deviceZoneId(Device device)
@@ -42,13 +46,8 @@ namespace DeviceManagement_WebApp.Repository
 
         public IIncludableQueryable<Device, Zone> getDevicesPerZoneById(Guid id)
         {
-            /*var device = await _context.Device
-               .Include(d => d.Category)
-               .Include(d => d.Zone)
-               .FirstOrDefaultAsync(m => m.DeviceId == id);*/
-
-            var device = _context.Device.Include(e => e.Category).Include(e => e.Zone).FirstOrDefaultAsync(m => m.DeviceId == id);
-            return (IIncludableQueryable<Device, Zone>)device;
+            var device = _context.Device.Include(e => e.Category).Include(e => e.Zone);
+            return device;
         }
 
         public SelectList getViewDataCategoryId()
